@@ -2,42 +2,39 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $phone_number
+ * @property string $password
+ * @property string $level
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
+ * @property Lahan[] $lahans
+ */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-
+    use Notifiable, HasRoles, SoftDeletes;
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['name', 'email', 'phone_number', 'password', 'level', 'alamat','created_at', 'updated_at', 'deleted_at'];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
-
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function lahans()
+    {
+        return $this->hasMany('App\Lahan', 'id_user');
+    }
 }
