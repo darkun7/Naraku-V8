@@ -14,11 +14,14 @@ class role
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $level)
+    public function handle(Request $request, Closure $next, ...$levels)
     {
-        if ($request->pengguna()->level == $level) {
+        if (in_array($request->user()->level,$levels)) {
             return $next($request);
         }
+        // if ($request->pengguna()->level == $level) {
+        //     return $next($request);
+        // }
         return redirect('/');
     }
 }
