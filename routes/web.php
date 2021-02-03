@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class,'landing'])->name('landing');
+Route::get('/tentang', [HomeController::class,'tentang'])->name('tentang');
+Auth::routes();
+//produsen
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('role:pelanggan');
+    Route::get('/kalkulator', [HomeController::class, 'kalkulator'])->name('kalkulator')->middleware('role:pelanggan');
+    Route::post('/kalkulator', [HomeController::class,'hitung'])->name('hitung')->middleware('role:pelanggan');
+    Route::get('/profil', 'ProfilController@index')->name('profil'); // unimplemented
+    Route::post('/profil', 'ProfilController@update')->name('profilstore')->middleware('role:pelanggan');
 });
-
