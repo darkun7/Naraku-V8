@@ -149,7 +149,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="f-logo">
-							<a href="home.html"><img src="{{ asset('assets/images/logo-light.png') }}" alt="Naraku" height="35px"></a>
+							<a href="/"><img src="{{ asset('assets/images/logo-light.png') }}" alt="Naraku" height="35px"></a>
 						</div>
 						<p>{{$web['deskripsi']}}</p>
 						<!-- socail network of the page -->
