@@ -15,7 +15,6 @@ class CreatePemesananTable extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('id_lahan')->nullable()->index('id_lahan');
             $table->string('nama_pemesan', 128);
             $table->integer('id_pupuk')->index('id_pupuk');
             $table->integer('jumlah');

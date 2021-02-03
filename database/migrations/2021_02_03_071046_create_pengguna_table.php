@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTanamanTable extends Migration
+class CreatePenggunaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateTanamanTable extends Migration
      */
     public function up()
     {
-        Schema::create('tanaman', function (Blueprint $table) {
+        Schema::create('pengguna', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('nama', 64);
-            $table->string('jenis_bibit', 64)->nullable();
+            $table->string('name', 32);
+            $table->string('email', 64);
+            $table->string('phone_number', 15)->nullable();
+            $table->string('password', 128);
+            $table->enum('level', ['pelanggan', 'produsen', 'admin', 'superadmin'])->default('pelanggan');
+            $table->text('alamat')->nullable();
+            $table->string('remember_token', 128)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->dateTime('updated_at')->nullable();
             $table->softDeletes();
@@ -30,6 +35,6 @@ class CreateTanamanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tanaman');
+        Schema::dropIfExists('pengguna');
     }
 }

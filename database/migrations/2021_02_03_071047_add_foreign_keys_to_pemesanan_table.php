@@ -14,7 +14,6 @@ class AddForeignKeysToPemesananTable extends Migration
     public function up()
     {
         Schema::table('pemesanan', function (Blueprint $table) {
-            $table->foreign('id_lahan', 'pemesanan_ibfk_1')->references('id')->on('lahan')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('id_pupuk', 'pemesanan_ibfk_2')->references('id')->on('pupuk')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }

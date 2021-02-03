@@ -14,7 +14,7 @@ class CreateWebSettingTable extends Migration
     public function up()
     {
         Schema::create('web_setting', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->integer('id', true);
             $table->text('deskripsi');
             $table->text('deskripsi_naraku');
             $table->text('jumbotron_title')->nullable();
@@ -25,6 +25,7 @@ class CreateWebSettingTable extends Migration
             $table->string('instagram', 64);
             $table->tinyInteger('maintenance')->default(0);
             $table->dateTime('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

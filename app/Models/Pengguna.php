@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
@@ -19,12 +19,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $deleted_at
  * @property Lahan[] $lahans
  */
-class User extends Authenticatable
+class Pengguna extends Authenticatable
 {
-    use Notifiable, HasRoles, SoftDeletes;
+    use Notifiable, SoftDeletes;
+    use HasFactory;
     /**
      * @var array
      */
+    protected $table = 'pengguna';
     protected $fillable = ['name', 'email', 'phone_number', 'password', 'level', 'alamat','created_at', 'updated_at', 'deleted_at'];
 
     protected $hidden = [
@@ -37,4 +39,5 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Lahan', 'id_user');
     }
+
 }

@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
- * @property Lahan $lahan
  * @property Pupuk $pupuk
  */
 class Pemesanan extends Model
@@ -33,15 +32,7 @@ class Pemesanan extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id_lahan', 'id_pupuk', 'nama_pemesan', 'jumlah', 'alamat', 'kontak', 'status', 'created_at', 'updated_at', 'deleted_at'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function lahan()
-    {
-        return $this->belongsTo('App\Models\Lahan', 'id_lahan');
-    }
+    protected $fillable = ['id_pupuk', 'nama_pemesan', 'jumlah', 'alamat', 'kontak', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
