@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\PenggunaRepository;
+use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {
+    public function __construct()
+    {
+        $this->penggunaRepository = new PenggunaRepository;
+        // $this->pupukRepository = new PupukRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,72 +20,25 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        //
+        $user = $this->penggunaRepository->auth_user();
+        return view('profil.index',compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(Request $request)
     {
-        //
+        $input = $request->all();
+        $user = $this->penggunaRepository->auth_user();
+        $oldpass = $input['old_password'];
+        if(Hash::check($oldpass, $user->password)){
+          unset( $input['old_password'] );
+          if(isset($input['password'])){
+            $input['password'] = Hash::make($input['password']);
+          }
+          $user->update($input);
+          return redirect()->route('profil')->with('success', 'Profil berhasil disimpan');
+        }else{
+          return redirect()->route('profil')->with('error', 'Kata Sandi konfirmasi tidak sesuai');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
