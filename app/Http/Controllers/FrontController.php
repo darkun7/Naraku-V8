@@ -21,7 +21,7 @@ class FrontController extends Controller
     public function landing()
     {
 
-        $web = $this->settingRepository->find(0);
+        $web = $this->settingRepository->find(1);
         $pupuk = $this->pupukRepository->all();
         return view('front.home', compact('web', 'pupuk'));
         // return view('front.home',compact('web', 'pupuk'));

@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\BahanController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SettingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,11 +30,11 @@ Route::post('/register', [AuthController::class,'register'])->name('register');
 Route::post('/logout', [AuthController::class,'logout'])->name('logout');
 //produsen
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('role:pelanggan');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('role:pelanggan,produsen');
     Route::get('/kalkulator', [HomeController::class, 'kalkulator'])->name('kalkulator')->middleware('role:pelanggan');
     Route::post('/kalkulator', [HomeController::class,'hitung'])->name('hitung')->middleware('role:pelanggan');
-    Route::get('/profil', 'ProfilController@index')->name('profil'); // unimplemented
-    Route::post('/profil', 'ProfilController@update')->name('profilstore')->middleware('role:pelanggan');
+    Route::get('/profil', [ProfilController::class,'index'])->name('profil'); // unimplemented
+    Route::post('/profil', [ProfilController::class,'update'])->name('profilstore')->middleware('role:pelanggan');
 //     Route::group(['as' => 'lahan.' , 'prefix' => 'lahan'], function () {                // unimplemented
 //         Route::get('/', [LahanController::class,'index'])->name('lahan')->middleware('role:pelanggan');
 //         Route::get('/tambah', [LahanController::class,'create'])->name('create')->middleware('role:pelanggan');
@@ -79,10 +81,10 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/{id}', 'PupukController@show')->name('show')->middleware('role:produsen|pelanggan');
     });
     Route::group(['as' => 'pengaturan.' , 'prefix' => 'pengaturan'], function () {                // unimplemented
-        Route::get('/website', 'PengaturanController@website')->name('website')->middleware('role:produsen');
-        Route::get('/jumbotron', 'PengaturanController@jumbotron')->name('jumbotron')->middleware('role:produsen');
-        Route::get('/kontak', 'PengaturanController@kontak')->name('kontak')->middleware('role:produsen');
-        Route::get('/maps', 'PengaturanController@maps')->name('maps')->middleware('role:produsen');
-        Route::post('/perbarui', 'PengaturanController@store')->name('store')->middleware('role:produsen');
+        Route::get('/website', [SettingController::class,'website'])->name('website')->middleware('role:produsen');
+        Route::get('/jumbotron', [SettingController::class,'jumbotron'])->name('jumbotron')->middleware('role:produsen');
+        Route::get('/kontak', [SettingController::class,'kontak'])->name('kontak')->middleware('role:produsen');
+        Route::get('/maps', [SettingController::class,'maps'])->name('maps')->middleware('role:produsen');
+        Route::post('/perbarui', [SettingController::class,'store'])->name('store')->middleware('role:produsen');
     });
 });
