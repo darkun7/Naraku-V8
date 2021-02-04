@@ -3,17 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\PemesananRepository;
-use App\Repositories\PupukRepository;
-use Carbon\Carbon;
 
-class HomeController extends Controller
+class PupukController extends Controller
 {
-    public function __construct()
-    {
-        $this->pemesananRepository = new PemesananRepository;
-        $this->pupukRepository = new PupukRepository;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,18 +13,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pemesanan = $this->pemesananRepository->all();
-        // $pesanan_selesai = $this->pemesananRepository::where('status', '=', 'selesai')->whereDate('created_at', '>', Carbon::today()->subDays(30)->toDateString())->get();
-        $allpemesanan = count($pemesanan);
-        $finishpesanan = 0;
-        return view('dasbor.index', compact('pemesanan', 'allpemesanan', 'finishpesanan'));
+        //
     }
 
-    public function tentang()
-    {
-        $web = \App\Models\Setting::findOrFail(0);
-        return view('front.tentang',compact('web'));
-    }
     /**
      * Show the form for creating a new resource.
      *

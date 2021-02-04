@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Pemesanan;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class PemesananRepository
 {
@@ -68,6 +69,15 @@ class PemesananRepository
         $pemesanan = Pemesanan::find($id);
         if ($pemesanan) {
             return $pemesanan->delete();
+        }
+        return 0;
+    }
+    
+    public function getPesananUser($status, $operator = "=")
+    {
+        $pemesanan = Pemesanan::where('nama_pemesan', Auth::user()->name)->where('status',$operator,$status);
+        if ($pemesanan) {
+            return $pemesanan->get();
         }
         return 0;
     }
