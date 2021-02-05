@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\BahanRepository;
 
 class BahanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $bahanRepository;
+
+    public function __construct()
+    {
+        $this->bahanRepository = new BahanRepository;
+    }
+
     public function index()
     {
-        dd("test");
+        $bahan = $this->bahanRepository->all();
+        return view('bahan.index', compact('bahan'));
     }
 
     /**
@@ -23,7 +27,8 @@ class BahanController extends Controller
      */
     public function create()
     {
-        //
+        $bahan = $this->bahanRepository->all();
+        return view('bahan.tambah', compact('bahan'));
     }
 
     /**
@@ -34,7 +39,18 @@ class BahanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        if(!isset($input['bahan'])){
+          return redirect()->route('bahan.create')->with('error', 'Harap melengkapi form isian');
+        }
+        if( isset($input['bahan']) && $input['bahan']=="bahan-baru" ){
+            $this->bahanRepository->create($input);
+          $state = 'ditambahkan';
+        }else{
+            $this->bahanRepository->update($input, $input['bahan']);
+          $state = 'diperbarui';
+        }
+        return redirect()->route('bahan.index')->with('success', 'Bahan berhasil '.$state);        
     }
 
     /**
@@ -45,7 +61,7 @@ class BahanController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +72,9 @@ class BahanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bahan = $this->bahanRepository->all();
+        $bahan = $this->bahanRepository->find($id);
+        return view('bahan.edit', compact('bahans', 'bahan'));
     }
 
     /**
@@ -68,7 +86,10 @@ class BahanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $bahan = $this->bahanRepository->update($input, $id);
+        return redirect()->route('bahan.index')->with('success', 'Bahan baku berhasil diperbarui');
+
     }
 
     /**
@@ -79,6 +100,9 @@ class BahanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->bahanRepository->delete($id) == 0){
+            redirect()->route('bahan.index')->with('error', 'Gagal menghapus bahan/ bahan tidak ditemukan.');
+        }
+        return redirect()->route('bahan.index')->with('success', 'Bahan berhasil dihapus');
     }
 }
