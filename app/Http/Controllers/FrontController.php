@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\SettingRepository;
 use App\Repositories\PupukRepository;
-
+use App\Models\Pupuk;
 class FrontController extends Controller
 {
     public function __construct()
@@ -29,7 +29,7 @@ class FrontController extends Controller
 
     public function tentang()
     {
-        $web = \App\Models\Setting::findOrFail(0);
+        $web = $this->settingRepository->find(1);
         return view('front.tentang',compact('web'));
     }
     /**

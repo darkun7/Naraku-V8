@@ -20,14 +20,14 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        $user = $this->penggunaRepository->auth_user();
+        $user = $this->penggunaRepository->authUser();
         return view('profil.index',compact('user'));
     }
 
     public function update(Request $request)
     {
         $input = $request->all();
-        $user = $this->penggunaRepository->auth_user();
+        $user = $this->penggunaRepository->authUser();
         $oldpass = $input['old_password'];
         if(Hash::check($oldpass, $user->password)){
           unset( $input['old_password'] );

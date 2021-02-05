@@ -14,7 +14,7 @@ class PenggunaRepository
      *
      * @return Collection
      */
-    public function auth_user()
+    public function authUser()
     {
         $id =  Auth::user()->id;
         $user = Pengguna::where('id', $id)->first();

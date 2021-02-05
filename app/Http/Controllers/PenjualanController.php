@@ -44,23 +44,23 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        foreach ($input['jumlah'] as $key => $value) {
-          $this->pemesananRepository->create($input);
-        }
-        $msg = "Saya hendak membeli : ";
-        foreach ($input['jumlah'] as $key => $value) {
-          $pupuk = $this->pupukRepository->find($input['id_pupuk']);
-          $msg .= '#enter# *'.$pupuk->nama.'* sebanyak '.$input['jumlah'][$key].'#enter# ';
-        }
-        $msg .= 'Alamat Pengiriman: '.$input['alamat'];
-        $msg = urlencode($msg);
-        $msg = str_replace("%23enter%23","%0A", $msg);
-        if(Auth::user()->level == 'admin'){
-          return redirect()->route('penjualan.index')->with('success', 'Pesanan berhasil ditambahkan');
-        }else{
-          Session::flash('success', 'Pesanan berhasil ditambahkan');
-          return redirect()->route('pesanan.index')->with('msg', $msg);
+        // $input = $request->all();
+        // foreach ($input['jumlah'] as $key => $value) {
+        //   $this->pemesananRepository->create($input);
+        // }
+        // $msg = "Saya hendak membeli : ";
+        // foreach ($input['jumlah'] as $key => $value) {
+        //   $pupuk = $this->pupukRepository->find($input['id_pupuk']);
+        //   $msg .= '#enter# *'.$pupuk->nama.'* sebanyak '.$input['jumlah'][$key].'#enter# ';
+        // }
+        // $msg .= 'Alamat Pengiriman: '.$input['alamat'];
+        // $msg = urlencode($msg);
+        // $msg = str_replace("%23enter%23","%0A", $msg);
+        // if(Auth::user()->level == 'admin'){
+        //   return redirect()->route('penjualan.index')->with('success', 'Pesanan berhasil ditambahkan');
+        // }else{
+        //   Session::flash('success', 'Pesanan berhasil ditambahkan');
+        //   return redirect()->route('pesanan.index')->with('msg', $msg);
         }
     }
 
