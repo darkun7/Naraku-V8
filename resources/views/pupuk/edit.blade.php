@@ -69,6 +69,7 @@
 															<div class="col-sm-9" id="area_entri">
                                 <?php $jml_komposisi = count($pupuk->komposisis()->get()); ?>
                                 @foreach ($pupuk->komposisis()->get() as $i => $komposisi)
+                                <input type="text" name="id[]" value="{{$komposisi['id']}}" style="display: none">
                                 <div id="entri{{$i}}">
                                     <div class="col-sm-5 mt-15">
                                       <select class="form-control" name="id_bahan[]" required>
@@ -141,6 +142,7 @@ $(document).ready(function(){
     i++;
     $("#area_entri").append(`
       <div id="entri`+i+`">
+        <input type="text" name="id[]" value="{{$komposisi['id']}}" style="display: none">
           <div class="col-sm-5 mt-15">
             <select class="form-control" name="id_bahan[]" required>
             <option value="null" disabled selected> Pilih bahan baku: </option>

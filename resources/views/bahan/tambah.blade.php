@@ -56,7 +56,7 @@
                             <div class="form-group">
 															<label for="exampleInputuname_3" class="col-sm-3 control-label">Stok Bahan</label>
 															<div class="col-sm-9">
-																	<input type="number" class="form-control" name="stok" placeholder="Stok Bahan" required>
+																	<input type="number" class="form-control" name="jumlah" placeholder="Stok Bahan" required>
 															</div>
 														</div>
                             <div class="form-group">

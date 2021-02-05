@@ -71,4 +71,10 @@ class PupukRepository
         }
         return 0;
     }
+
+    public function arsip()
+    {
+        $pupuk = Pupuk::whereNotNull('deleted_at')->get();
+        return $pupuk;
+    }
 }
