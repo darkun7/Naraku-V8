@@ -38,7 +38,8 @@
         background-color: #27ae60;
       }
     </style>
-
+	<!-- Toast CSS -->
+	<link href="{{ asset('main/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css') }}" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<!--Preloader-->
@@ -128,5 +129,24 @@
 
 		<!-- Init JavaScript -->
 		<script src="{{ asset('main/js/init.js') }}"></script>
+		<!-- Toast JavaScript -->
+		<script src="{{ asset('main/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js') }}"></script>
+		<script>
+		@if($errors->any())
+			$(window).on("load",function(){
+				window.setTimeout(function(){
+					$.toast({
+						heading: 'Kesalahan',
+						text: "• {!! implode('<br>• ', $errors->all(':message')) !!}",
+						position: 'top-left',
+						loaderBg:'#e3c94b',
+						icon: '',
+						hideAfter: 3500,
+						stack: 6
+					});
+				}, 1000);
+			});
+		@endif
+		</script>
 	</body>
 </html>

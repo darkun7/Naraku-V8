@@ -351,6 +351,22 @@
 	<script src="{{ asset('main/js/dashboard2-data.js') }}"></script>
 
   <script>
+	@if($errors->any())
+		$(window).on("load",function(){
+			window.setTimeout(function(){
+				$.toast({
+					heading: 'Kesalahan',
+					text: "• {!! implode('<br>• ', $errors->all(':message')) !!}",
+					position: 'top-left',
+					loaderBg:'#e3c94b',
+					icon: '',
+					hideAfter: 3500,
+					stack: 6
+				});
+			}, 1000);
+		});
+	@endif
+
     @if($message = Session::get('error'))
     $(window).on("load",function(){
     	window.setTimeout(function(){
