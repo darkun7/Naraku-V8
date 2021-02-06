@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/kalkulator', [HomeController::class, 'kalkulator'])->name('kalkulator')->middleware('role:pelanggan');
     Route::post('/kalkulator', [HomeController::class,'hitung'])->name('hitung')->middleware('role:pelanggan');
     Route::get('/profil', [ProfilController::class,'index'])->name('profil');
-    Route::post('/profil', [ProfilController::class,'update'])->name('profilstore')->middleware('role:pelanggan');
+    Route::post('/profil', [ProfilController::class,'update'])->name('profilstore');
 //     Route::group(['as' => 'lahan.' , 'prefix' => 'lahan'], function () {                // unimplemented
 //         Route::get('/', [LahanController::class,'index'])->name('lahan')->middleware('role:pelanggan');
 //         Route::get('/tambah', [LahanController::class,'create'])->name('create')->middleware('role:pelanggan');
@@ -87,6 +87,6 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/jumbotron', [SettingController::class,'jumbotron'])->name('jumbotron')->middleware('role:produsen');
         Route::get('/kontak', [SettingController::class,'kontak'])->name('kontak')->middleware('role:produsen');
         Route::get('/maps', [SettingController::class,'maps'])->name('maps')->middleware('role:produsen');
-        Route::post('/perbarui', [SettingController::class,'store'])->name('store')->middleware('role:produsen');
+        Route::post('/perbarui', [SettingController::class,'update'])->name('store')->middleware('role:produsen');
     });
 });

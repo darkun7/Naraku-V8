@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\SettingRepository;
+use App\Http\Requests\SettingRequest;
 
 class SettingController extends Controller
 {
@@ -41,11 +42,9 @@ class SettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function update(SettingRequest $request)
     {
-        $input = $request->all();
-        $web = $this->settingRepository->find(1);
-        $web->update($input);
+        $web = $this->settingRepository->update($request->all(),1);;
         return redirect()->route('home')->with('success', 'Pengaturan website berhasil disimpan');
     }
 }
