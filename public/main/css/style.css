@@ -7532,4 +7532,16 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
   .pagination-lg > li > a, .pagination-lg > li > span {
     padding: 10px 12px; } }
 
+.bg-gradient, .jq-toast-wrap .jq-toast-single, .weather-gradient .left-block-wrap, .fc-unthemed .fc-today {
+  background: linear-gradient(45deg, #635bd6, #f742aa) !important; }
+
+.bg-gradient1, .weather-gradient1 .left-block-wrap {
+  background: linear-gradient(45deg, #45c0ba, #76c880) !important; }
+
+.bg-gradient2, .weather-gradient2 .left-block-wrap {
+  background: linear-gradient(45deg, #f16e3c, #e3c94b) !important; }
+
+.bg-gradient3, .weather-gradient3 .left-block-wrap {
+  background: linear-gradient(45deg, #705be1, #52d8c6) !important; }
+
 /*# sourceMappingURL=style.css.map */
