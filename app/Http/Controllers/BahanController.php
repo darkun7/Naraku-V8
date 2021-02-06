@@ -72,7 +72,7 @@ class BahanController extends Controller
      */
     public function edit($id)
     {
-        $bahan = $this->bahanRepository->all();
+        $bahans = $this->bahanRepository->all();
         $bahan = $this->bahanRepository->find($id);
         return view('bahan.edit', compact('bahans', 'bahan'));
     }
