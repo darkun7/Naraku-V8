@@ -7,6 +7,7 @@ use App\Helpers\StorageHelper;
 use App\Repositories\PupukRepository;
 use App\Repositories\KomposisiRepository;
 use App\Repositories\BahanRepository;
+use App\Http\Requests\PupukRequest;
 
 class PupukController extends Controller
 {
@@ -30,8 +31,9 @@ class PupukController extends Controller
         return view('pupuk.tambah', compact('bahan'));
     }
 
-    public function store(Request $request)
+    public function store(PupukRequest $request)
     {
+      
       $input = $request->all();
       $input['id_bahan'] = array_unique($input['id_bahan']);
       if(count($input['id_bahan']) != count($input['rasio'])){
@@ -64,8 +66,9 @@ class PupukController extends Controller
         return view('pupuk.edit', compact('bahan', 'pupuk'));
     }
 
-    public function update(Request $request, $id)
+    public function update(PupukRequest $request, $id)
     {
+      
         $input = $request->all();
         $input['id_bahan'] = array_unique($input['id_bahan']);
         if(count($input['id_bahan']) != count($input['rasio'])){

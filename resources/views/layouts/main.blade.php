@@ -230,7 +230,7 @@
 							<a href="{{route('pesanan.index')}}">Sedang Dipesan</a>
 						</li>
 						<li>
-							<a href="{{route('pesanan.riwayatpesan')}}">Riwayat Pesanan</a>
+							<a href="{{route('pesanan.riwayatPesan')}}">Riwayat Pesanan</a>
 						</li>
 					</ul>
 				</li>

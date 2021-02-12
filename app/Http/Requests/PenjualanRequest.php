@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Bahan;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BahanRequest extends FormRequest
+class PenjualanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class BahanRequest extends FormRequest
      */
     public function authorize()
     {
-        return True;
+        return true;
     }
 
     /**
@@ -25,10 +24,11 @@ class BahanRequest extends FormRequest
     public function rules()
     {
         return [
-            'jumlah'    =>'sometimes|max:11',
-            'nama'      =>'sometimes|max:64',
-            'satuan'    =>'sometimes|',
-            'bahan'     =>'sometimes|max:11'
+            'nama_pemesan'  => 'sometimes|max:128',
+            'id_pupuk'      => 'sometimes|max:11',
+            'jumlah'        => 'sometimes|max:11',
+            'kontak'        => 'sometimes|max:15',
+            'alamat'        => 'required'
         ];
     }
 }

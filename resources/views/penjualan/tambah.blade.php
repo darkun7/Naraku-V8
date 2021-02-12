@@ -88,7 +88,7 @@
                             <div class="form-group">
 															<label for="exampleInputuname_3" class="col-sm-3 control-label">Kontak</label>
 															<div class="col-sm-9">
-																	<input type="text" class="form-control" name="kontak" placeholder="kontak" required>
+																	<input type="number" class="form-control" name="kontak" placeholder="kontak" required>
 															</div>
 														</div>
                             <!-- <div class="col-sm-3">

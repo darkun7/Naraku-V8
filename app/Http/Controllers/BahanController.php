@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\BahanRepository;
+use App\Http\Requests\BahanRequest;
 
 class BahanController extends Controller
 {
@@ -37,7 +38,7 @@ class BahanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BahanRequest $request)
     {
         $input = $request->all();
         if(!isset($input['bahan'])){
