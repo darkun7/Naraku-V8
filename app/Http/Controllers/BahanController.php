@@ -48,7 +48,19 @@ class BahanController extends Controller
             $this->bahanRepository->create($input);
           $state = 'ditambahkan';
         }else{
-            $this->bahanRepository->update($input, $input['bahan']);
+            //mengambil jumlah
+            $bahan = $this->bahanRepository->find($input['bahan']);
+            $total = $bahan['jumlah'] + $request['jumlah'];
+
+            //mengganti jumlah di request
+            $request->merge(['jumlah' => $total]);
+            
+            $data = $request->only([
+                'jumlah',
+                'satuan',
+                'bahan'
+            ]);
+            $this->bahanRepository->update($data, $data['bahan']);
           $state = 'diperbarui';
         }
         return redirect()->route('bahan.index')->with('success', 'Bahan berhasil '.$state);        
