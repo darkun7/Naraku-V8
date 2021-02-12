@@ -37,7 +37,7 @@ class PupukRepository
      */
     public function find(int $id)
     {
-        return Pupuk::find($id);
+        return Pupuk::withTrashed()->find($id);
     }
 
     /**
@@ -49,7 +49,7 @@ class PupukRepository
      */
     public function update(array $data, int $id)
     {
-        $pupuk = Pupuk::find($id);
+        $pupuk = Pupuk::withTrashed()->find($id);
         if ($pupuk) {
             $pupuk->update($data);
             return $pupuk;
@@ -65,7 +65,7 @@ class PupukRepository
      */
     public function delete(int $id)
     {
-        $pupuk = Pupuk::find($id);
+        $pupuk = Pupuk::withTrashed()->find($id);
         if ($pupuk) {
             return $pupuk->delete();
         }
@@ -74,7 +74,7 @@ class PupukRepository
 
     public function arsip()
     {
-        $pupuk = Pupuk::whereNotNull('deleted_at')->get();
+        $pupuk = Pupuk::onlyTrashed()->get();
         return $pupuk;
     }
 }

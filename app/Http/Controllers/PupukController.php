@@ -33,7 +33,6 @@ class PupukController extends Controller
 
     public function store(PupukRequest $request)
     {
-      
       $input = $request->all();
       $input['id_bahan'] = array_unique($input['id_bahan']);
       if(count($input['id_bahan']) != count($input['rasio'])){
@@ -110,14 +109,12 @@ class PupukController extends Controller
      }
      public function revert($id)
      {
-       $pupuk = $this->pupukRepository->find($id);
-       if($pupuk->get()->isEmpty()){
-           redirect()->route('pupuk.index')->with('error', 'Gagal mengembalikan pupuk/ arsip pupuk tidak ditemukan.');
-       }
-       $this->pupukRepository->update([
-         'deleted_at'    => null
-       ],$id);
-       return redirect()->route('pupuk.arsip')->with('success', 'Pupuk berhasil dikembalikan ke daftar produk');
+          $pupuk = $this->pupukRepository->find($id);
+
+          $this->pupukRepository->update([
+            'deleted_at'    => null
+          ],$id);
+          return redirect()->route('pupuk.arsip')->with('success', 'Pupuk berhasil dikembalikan ke daftar produk');
 
     }
 
