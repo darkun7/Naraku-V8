@@ -41,8 +41,6 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h5 class="modal-title">Lanjutkan ke Whatsaap</h5>
             </div>
-            <?php $web = \App\Setting::find(0);
-            ?>
             <div class="modal-body">
               <form>
                 <div class="form-group">

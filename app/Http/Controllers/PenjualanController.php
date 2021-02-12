@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\PemesananRepository;
 use App\Repositories\PupukRepository;
 use App\Http\Requests\PenjualanRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PenjualanController extends Controller
 {
@@ -47,17 +48,26 @@ class PenjualanController extends Controller
     {
         $input = $request->all();
         foreach ($input['jumlah'] as $key => $value) {
-          $this->pemesananRepository->create($input);
+            $pesanan = $request->only([
+                'nama_pemesan',
+                'kontak',
+                'alamat'
+            ]);
+            $pesanan['id_pupuk'] = $input['id_pupuk'][$key];
+            $pesanan['jumlah'] = $input['jumlah'][$key];
+
+            $this->pemesananRepository->create($pesanan);
         }
         $msg = "Saya hendak membeli : ";
         foreach ($input['jumlah'] as $key => $value) {
-          $pupuk = $this->pupukRepository->find($input['id_pupuk']);
+          $pupuk = $this->pupukRepository->find($input['id_pupuk'][$key]);
           $msg .= '#enter# *'.$pupuk->nama.'* sebanyak '.$input['jumlah'][$key].'#enter# ';
         }
         $msg .= 'Alamat Pengiriman: '.$input['alamat'];
         $msg = urlencode($msg);
         $msg = str_replace("%23enter%23","%0A", $msg);
-        if(Auth::user()->level == 'admin'){
+
+        if(Auth::user()->level == 'produsen'){
           return redirect()->route('penjualan.index')->with('success', 'Pesanan berhasil ditambahkan');
         }else{
           Session::flash('success', 'Pesanan berhasil ditambahkan');
