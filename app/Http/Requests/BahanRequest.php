@@ -25,10 +25,10 @@ class BahanRequest extends FormRequest
     public function rules()
     {
         return [
-            'jumlah'    =>'sometimes|max:11',
-            'nama'      =>'sometimes|max:64',
-            'satuan'    =>'sometimes|',
-            'bahan'     =>'sometimes|max:11'
+            'jumlah'    =>'required|max:11',
+            'nama'      =>'required|max:64',
+            'satuan'    =>'required|',
+            'bahan'     =>'required|max:11'
         ];
     }
 }

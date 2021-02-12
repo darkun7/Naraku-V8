@@ -24,10 +24,10 @@ class PenjualanRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_pemesan'  => 'sometimes|max:128',
-            'id_pupuk'      => 'sometimes|max:11',
-            'jumlah'        => 'sometimes|max:11',
-            'kontak'        => 'sometimes|max:15',
+            'nama_pemesan'  => 'required|max:128',
+            'id_pupuk'      => 'required|array|min:1',
+            'jumlah'        => 'required|array|min:1',
+            'kontak'        => 'required|max:15',
             'alamat'        => 'required'
         ];
     }

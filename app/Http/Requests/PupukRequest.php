@@ -24,13 +24,12 @@ class PupukRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'            =>'sometimes|max:11',
-            'nama'          =>'sometimes|max:64',
-            'deskripsi'     =>'sometimes',
-            'harga'         =>'sometimes|max:11',
-            'id_bahan'      =>'sometimes|max:11',
-            'rasio'         =>'sometimes',
-            'satuan'        =>'sometimes'
+            'nama'          =>'required|max:64',
+            'deskripsi'     =>'required',
+            'harga'         =>'required|max:11',
+            'id_bahan'      =>'required|array|min:2',
+            'rasio'         =>'required|array|min:2',
+            'satuan'        =>'required|array|min:2'
         ];
     }
 }
